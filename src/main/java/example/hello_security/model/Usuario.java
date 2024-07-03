@@ -10,11 +10,15 @@ import lombok.EqualsAndHashCode;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
+
 
     public Usuario(String username, String password) {
         this.password = password;
@@ -23,4 +27,6 @@ public class Usuario {
 
     public Usuario() {
     }
+
+
 }
