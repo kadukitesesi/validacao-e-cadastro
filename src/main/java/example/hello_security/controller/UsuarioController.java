@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Set;
@@ -35,9 +36,16 @@ public class UsuarioController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @GetMapping("/novo")
+    public ModelAndView mostrarCadastro() {
+        ModelAndView model = new ModelAndView("cadastro_form");
+        model.addObject("usuario", new Usuario());
+        return model;
+    }
+
     @Transactional
-    @PostMapping("/users")
-    public ResponseEntity<Void> newUser(@RequestBody CreateUserDto dto) {
+    @PostMapping("admin/users")
+    public ResponseEntity<Void> cadastro(@RequestBody CreateUserDto dto) {
 
         var basicRole = roleRepository.findByName(Role.Values.BASIC.name());
 
